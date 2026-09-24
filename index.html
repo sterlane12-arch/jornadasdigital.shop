@@ -1,1433 +1,415 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
->
-
-<meta name="robots" content="index,follow">
-
-<meta
-    name="description"
-    content="Página independente para consulta de informações sobre negociação de dívidas."
->
-
-<meta name="theme-color" content="#f4f8ff">
-
-<title>Consulta de negociação de dívidas</title>
+<title>Continuar</title>
 
 <style>
-
-:root{
-    --blue:#0b2d69;
-    --blue-light:#1559d6;
-    --green:#08b77a;
-    --green-dark:#04a66e;
-    --yellow:#ffc928;
-
-    --bg:#f4f8ff;
-    --white:#ffffff;
-
-    --text:#102d67;
-    --muted:#6680ad;
-
-    --border:#e1eaf7;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-*{
-    box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
+html, body {
+    width: 100%;
+    min-height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    margin:0;
-    padding:0;
-
-    width:100%;
-    min-height:100vh;
-
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
-    color:var(--text);
-
+body {
     background:
-        radial-gradient(
-            circle at 100% 8%,
-            rgba(42,130,255,.12),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 0% 85%,
-            rgba(0,190,130,.10),
-            transparent 28%
-        ),
-        var(--bg);
-
-    padding-bottom:95px;
+        radial-gradient(circle at top, #ffffff 0%, #f4f6f9 45%, #e9edf2 100%);
+    color: #202124;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
 }
 
-
-/* =========================================
-   PÁGINA
-========================================= */
-
-.page{
-    width:100%;
-    max-width:500px;
-
-    min-height:100svh;
-
-    margin:auto;
-
-    padding:
-        12px
-        12px
-        30px;
+/* Fundo decorativo */
+.bg-circle {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(2px);
+    opacity: .45;
+    pointer-events: none;
 }
 
-
-/* =========================================
-   CABEÇALHO
-========================================= */
-
-.header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    padding:
-        8px
-        5px
-        17px;
+.circle-1 {
+    width: 250px;
+    height: 250px;
+    background: #dcecff;
+    top: -80px;
+    left: -80px;
 }
 
-.brand{
-    display:flex;
-    align-items:center;
-    gap:10px;
+.circle-2 {
+    width: 300px;
+    height: 300px;
+    background: #e8ddff;
+    right: -100px;
+    bottom: -100px;
 }
 
-.brand-icon{
-    width:45px;
-    height:45px;
+/* CARD */
+.container {
+    width: calc(100% - 32px);
+    max-width: 430px;
+    position: relative;
+    z-index: 2;
+}
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:14px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--green),
-            var(--blue-light)
-        );
-
-    color:#fff;
-
-    font-size:22px;
-    font-weight:900;
-
+.card {
+    background: rgba(255,255,255,.94);
+    border: 1px solid rgba(0,0,0,.07);
+    border-radius: 24px;
+    padding: 30px 22px;
+    text-align: center;
     box-shadow:
-        0 8px 20px
-        rgba(21,89,214,.20);
+        0 20px 60px rgba(0,0,0,.10),
+        0 4px 15px rgba(0,0,0,.05);
+    backdrop-filter: blur(12px);
 }
 
-.brand-text{
-    line-height:1.05;
+/* ÍCONE */
+.icon {
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 18px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f5f9;
+    font-size: 31px;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.04);
 }
 
-.brand-text small{
-    display:block;
-
-    margin-bottom:4px;
-
-    color:#607ba7;
-
-    font-size:9px;
-    font-weight:800;
-
-    letter-spacing:.7px;
-    text-transform:uppercase;
+h1 {
+    font-size: 25px;
+    line-height: 1.2;
+    margin-bottom: 10px;
 }
 
-.brand-text strong{
-    display:block;
-
-    color:var(--blue);
-
-    font-size:16px;
-    font-weight:900;
-
-    letter-spacing:-.3px;
+.description {
+    color: #687078;
+    font-size: 15px;
+    line-height: 1.55;
+    margin-bottom: 24px;
 }
 
-.security{
-    display:flex;
-    align-items:center;
-    gap:5px;
-
-    color:#5876a5;
-
-    font-size:10px;
-    font-weight:700;
+/* ÁREA DE VERIFICAÇÃO */
+.verify-box {
+    border: 1px solid #dfe3e7;
+    background: #fafafa;
+    border-radius: 14px;
+    padding: 14px;
+    text-align: left;
 }
 
-
-/* =========================================
-   PROGRESSO
-========================================= */
-
-.progress-area{
-    padding:
-        0
-        5px
-        18px;
+.verify-content {
+    display: flex;
+    align-items: center;
+    gap: 13px;
 }
 
-.progress-info{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    margin-bottom:8px;
-
-    color:#6a82aa;
-
-    font-size:11px;
-    font-weight:800;
+.check {
+    width: 27px;
+    height: 27px;
+    border: 2px solid #b8bec5;
+    border-radius: 6px;
+    background: white;
+    flex-shrink: 0;
+    position: relative;
+    transition: .3s ease;
 }
 
-.progress{
-    width:100%;
-    height:7px;
-
-    overflow:hidden;
-
-    border-radius:20px;
-
-    background:#dfe9f7;
+.check.active {
+    background: #22c55e;
+    border-color: #22c55e;
 }
 
-.progress-fill{
-    width:33.33%;
-    height:100%;
-
-    border-radius:20px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #08b77a,
-            #19cf91
-        );
-
-    animation:
-        progressIn .9s ease-out;
+.check.active::after {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 13px;
+    border-right: 3px solid white;
+    border-bottom: 3px solid white;
+    transform: rotate(45deg);
+    left: 8px;
+    top: 4px;
 }
 
-@keyframes progressIn{
+.verify-text strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 3px;
+}
 
-    from{
-        width:0;
+.verify-text span {
+    font-size: 12px;
+    color: #737a81;
+}
+
+/* BOTÃO */
+.continue-btn {
+    width: 100%;
+    margin-top: 18px;
+    border: 0;
+    border-radius: 13px;
+    padding: 16px;
+    background: #111827;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .25s ease;
+    box-shadow: 0 8px 20px rgba(17,24,39,.18);
+}
+
+.continue-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(17,24,39,.25);
+}
+
+.continue-btn:active {
+    transform: scale(.98);
+}
+
+/* RODAPÉ */
+.footer {
+    margin-top: 18px;
+    color: #8a929a;
+    font-size: 11px;
+}
+
+/* BOTÃO FLUTUANTE */
+.floating {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 10;
+    background: white;
+    border: 1px solid #dfe3e7;
+    border-radius: 14px;
+    padding: 9px 12px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.16);
+    cursor: pointer;
+    animation: float 3s ease-in-out infinite;
+}
+
+.floating-check {
+    width: 25px;
+    height: 25px;
+    border: 2px solid #b7bdc3;
+    border-radius: 5px;
+    background: #fff;
+    transition: .3s;
+}
+
+.floating-text {
+    font-size: 11px;
+    color: #444;
+}
+
+.floating-text strong {
+    display: block;
+    font-size: 12px;
+    color: #222;
+}
+
+.floating-logo {
+    font-size: 9px;
+    color: #999;
+    margin-left: 3px;
+}
+
+.floating.active .floating-check {
+    background: #22c55e;
+    border-color: #22c55e;
+}
+
+.floating.active .floating-check::after {
+    content: "✓";
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
     }
 
-    to{
-        width:33.33%;
-    }
-}
-
-
-/* =========================================
-   CARD
-========================================= */
-
-.card{
-    position:relative;
-
-    overflow:hidden;
-
-    background:
-        rgba(255,255,255,.98);
-
-    border:
-        1px solid
-        rgba(219,229,244,.85);
-
-    border-radius:27px;
-
-    box-shadow:
-        0 20px 55px rgba(35,74,130,.12),
-        0 3px 10px rgba(35,74,130,.05);
-
-    animation:
-        cardIn .65s
-        cubic-bezier(.2,.8,.2,1);
-}
-
-@keyframes cardIn{
-
-    from{
-        opacity:0;
-        transform:translateY(18px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-
-/* =========================================
-   HERO
-========================================= */
-
-.hero{
-    padding:
-        27px
-        19px
-        20px;
-}
-
-.badge{
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-
-    padding:
-        8px
-        13px;
-
-    border-radius:50px;
-
-    background:#e7fbf3;
-
-    color:#069865;
-
-    font-size:11px;
-    font-weight:900;
-
-    letter-spacing:.25px;
-}
-
-.badge-dot{
-    width:7px;
-    height:7px;
-
-    border-radius:50%;
-
-    background:var(--green);
-
-    box-shadow:
-        0 0 0 4px
-        rgba(8,183,122,.11);
-
-    animation:
-        pulse 1.8s infinite;
-}
-
-@keyframes pulse{
-
-    0%,100%{
-        box-shadow:
-            0 0 0 4px
-            rgba(8,183,122,.10);
-    }
-
-    50%{
-        box-shadow:
-            0 0 0 8px
-            rgba(8,183,122,0);
+    50% {
+        transform: translateY(-5px);
     }
 }
 
-h1{
-    margin:
-        18px 0 0;
-
-    color:var(--blue);
-
-    font-size:39px;
-    line-height:1.02;
-
-    letter-spacing:-1.8px;
-
-    font-weight:950;
+/* LOADING */
+.loading {
+    display: none;
+    margin-top: 15px;
+    font-size: 13px;
+    color: #69717a;
 }
 
-h1 span{
-    color:var(--blue-light);
+.spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid #ddd;
+    border-top-color: #111827;
+    border-radius: 50%;
+    vertical-align: -3px;
+    margin-right: 5px;
+    animation: spin .7s linear infinite;
 }
 
-.intro{
-    margin:
-        15px 0 0;
-
-    color:var(--muted);
-
-    font-size:17px;
-    line-height:1.48;
-}
-
-
-/* =========================================
-   ILUSTRAÇÃO
-========================================= */
-
-.illustration{
-    position:relative;
-
-    height:160px;
-
-    margin:
-        18px 0
-        2px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.blob{
-    position:absolute;
-
-    width:150px;
-    height:150px;
-
-    border-radius:50%;
-
-    background:
-        linear-gradient(
-            135deg,
-            #d9faec,
-            #dbeaff
-        );
-
-    animation:
-        float 5s
-        ease-in-out
-        infinite;
-}
-
-@keyframes float{
-
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(-6px);
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
     }
 }
 
-.phone{
-    position:relative;
-    z-index:2;
+/* MOBILE */
+@media (max-width: 480px) {
 
-    width:104px;
-    height:151px;
-
-    border:
-        7px solid
-        #1760d9;
-
-    border-radius:23px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #f9fcff,
-            #e7f0ff
-        );
-
-    transform:rotate(7deg);
-
-    box-shadow:
-        0 17px 30px
-        rgba(20,83,180,.22);
-
-    animation:
-        phoneIn .8s ease-out;
-}
-
-@keyframes phoneIn{
-
-    from{
-        opacity:0;
-
-        transform:
-            rotate(15deg)
-            translateY(12px);
+    .container {
+        width: calc(100% - 22px);
     }
 
-    to{
-        opacity:1;
-
-        transform:
-            rotate(7deg)
-            translateY(0);
-    }
-}
-
-.phone-notch{
-    position:absolute;
-
-    top:-1px;
-    left:50%;
-
-    width:41px;
-    height:12px;
-
-    transform:
-        translateX(-50%);
-
-    border-radius:
-        0 0 10px 10px;
-
-    background:#1760d9;
-}
-
-.phone-content{
-    position:absolute;
-
-    left:12px;
-    right:12px;
-    top:39px;
-
-    height:70px;
-
-    border-radius:12px;
-
-    background:#fff;
-
-    box-shadow:
-        0 4px 12px
-        rgba(30,70,130,.08);
-}
-
-.check{
-    position:absolute;
-
-    top:50%;
-    left:50%;
-
-    width:38px;
-    height:38px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    transform:
-        translate(-50%,-50%);
-
-    border-radius:50%;
-
-    background:
-        linear-gradient(
-            135deg,
-            #18c989,
-            #08a96e
-        );
-
-    color:#fff;
-
-    font-size:20px;
-    font-weight:900;
-}
-
-.shield{
-    position:absolute;
-
-    z-index:3;
-
-    right:52px;
-    bottom:8px;
-
-    width:56px;
-    height:56px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:18px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #11c88a,
-            #04a86e
-        );
-
-    color:#fff;
-
-    font-size:25px;
-
-    box-shadow:
-        0 10px 22px
-        rgba(4,168,110,.25);
-
-    animation:
-        shieldIn .8s .15s both;
-}
-
-@keyframes shieldIn{
-
-    from{
-        opacity:0;
-        transform:scale(.7);
+    .card {
+        padding: 26px 17px;
+        border-radius: 21px;
     }
 
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-}
-
-
-/* =========================================
-   BENEFÍCIOS
-========================================= */
-
-.features{
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:9px;
-
-    margin-top:8px;
-}
-
-.feature{
-    padding:
-        14px
-        10px;
-
-    text-align:center;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius:16px;
-
-    background:#f8fbff;
-
-    transition:
-        transform .2s ease;
-}
-
-.feature:active{
-    transform:scale(.98);
-}
-
-.feature-icon{
-    width:39px;
-    height:39px;
-
-    margin:auto;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:12px;
-
-    font-size:18px;
-    font-weight:900;
-}
-
-.feature:nth-child(1)
-.feature-icon{
-    background:#e5edff;
-    color:#2865d8;
-}
-
-.feature:nth-child(2)
-.feature-icon{
-    background:#e5faf2;
-    color:#08a970;
-}
-
-.feature:nth-child(3)
-.feature-icon{
-    background:#fff4d6;
-    color:#e7a900;
-}
-
-.feature:nth-child(4)
-.feature-icon{
-    background:#eee8ff;
-    color:#7446d9;
-}
-
-.feature strong{
-    display:block;
-
-    margin-top:8px;
-
-    color:var(--blue);
-
-    font-size:13px;
-    line-height:1.2;
-}
-
-.feature small{
-    display:block;
-
-    margin-top:4px;
-
-    color:#7185a7;
-
-    font-size:10px;
-    line-height:1.3;
-}
-
-
-/* =========================================
-   BOTÃO PRINCIPAL
-========================================= */
-
-.cta{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:9px;
-
-    width:100%;
-    min-height:64px;
-
-    margin-top:20px;
-    padding:
-        10px
-        15px;
-
-    border-radius:18px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #08c88a,
-            #04aa71
-        );
-
-    color:#fff;
-
-    text-decoration:none;
-
-    font-size:17px;
-    font-weight:900;
-
-    box-shadow:
-        0 13px 28px
-        rgba(4,174,117,.27);
-
-    transition:
-        transform .18s ease,
-        box-shadow .18s ease;
-}
-
-.cta:active{
-    transform:scale(.98);
-}
-
-.cta-arrow{
-    width:34px;
-    height:34px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:
-        rgba(255,255,255,.18);
-
-    font-size:20px;
-}
-
-
-/* =========================================
-   TEMPO
-========================================= */
-
-.time{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:6px;
-
-    margin:
-        12px 0 0;
-
-    color:#6680ad;
-
-    font-size:11px;
-    font-weight:700;
-}
-
-
-/* =========================================
-   AVISO
-========================================= */
-
-.warning{
-    display:flex;
-    gap:10px;
-
-    margin-top:19px;
-
-    padding:13px;
-
-    border:
-        1px solid
-        #f1df9e;
-
-    border-radius:15px;
-
-    background:#fffaf0;
-
-    color:#69717c;
-
-    font-size:10px;
-    line-height:1.5;
-}
-
-.warning-icon{
-    flex:none;
-
-    width:28px;
-    height:28px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:9px;
-
-    background:#fff0bd;
-
-    color:#c38b00;
-
-    font-size:15px;
-    font-weight:900;
-}
-
-.warning strong{
-    color:#45505f;
-}
-
-
-/* =========================================
-   FOOTER
-========================================= */
-
-.footer{
-    padding:
-        18px
-        17px
-        20px;
-
-    border-top:
-        1px solid
-        var(--border);
-
-    text-align:center;
-
-    color:#7186a8;
-
-    font-size:9px;
-    line-height:1.5;
-}
-
-.steps{
-    display:flex;
-    justify-content:center;
-    gap:6px;
-
-    margin-top:13px;
-}
-
-.step{
-    width:24px;
-    height:5px;
-
-    border-radius:20px;
-
-    background:#dce6f4;
-}
-
-.step.active{
-    width:37px;
-
-    background:#08b77a;
-}
-
-
-/* =========================================
-   BOTÃO FLUTUANTE DE ACESSO
-========================================= */
-
-.floating-link{
-    position:fixed;
-
-    left:50%;
-    bottom:18px;
-
-    z-index:9999;
-
-    width:
-        calc(100% - 28px);
-
-    max-width:470px;
-
-    min-height:58px;
-
-    transform:
-        translateX(-50%);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    gap:10px;
-
-    padding:
-        10px
-        16px;
-
-    border:0;
-
-    border-radius:18px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #08c88a,
-            #04aa71
-        );
-
-    color:#fff;
-
-    text-decoration:none;
-
-    font-size:16px;
-    font-weight:900;
-
-    box-shadow:
-        0 12px 30px
-        rgba(4,174,117,.35);
-
-    animation:
-        floatingIn .7s
-        cubic-bezier(.2,.8,.2,1);
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease;
-}
-
-@keyframes floatingIn{
-
-    from{
-        opacity:0;
-
-        transform:
-            translateX(-50%)
-            translateY(25px);
+    h1 {
+        font-size: 23px;
     }
 
-    to{
-        opacity:1;
-
-        transform:
-            translateX(-50%)
-            translateY(0);
+    .floating {
+        right: 12px;
+        bottom: 12px;
     }
 }
-
-.floating-link:hover{
-    box-shadow:
-        0 16px 35px
-        rgba(4,174,117,.42);
-}
-
-.floating-link:active{
-    transform:
-        translateX(-50%)
-        scale(.97);
-}
-
-.floating-link-icon{
-    width:34px;
-    height:34px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:
-        rgba(255,255,255,.18);
-
-    font-size:20px;
-}
-
-.floating-link-arrow{
-    font-size:21px;
-}
-
-
-/* =========================================
-   MOBILE PEQUENO
-========================================= */
-
-@media(max-width:360px){
-
-    .page{
-        padding:
-            9px
-            9px
-            22px;
-    }
-
-    .hero{
-        padding:
-            23px
-            16px
-            17px;
-    }
-
-    h1{
-        font-size:34px;
-    }
-
-    .intro{
-        font-size:15px;
-    }
-
-    .illustration{
-        height:145px;
-    }
-
-    .blob{
-        width:135px;
-        height:135px;
-    }
-
-    .phone{
-        width:92px;
-        height:138px;
-    }
-
-    .shield{
-        right:42px;
-
-        width:50px;
-        height:50px;
-    }
-
-    .feature{
-        padding:
-            12px
-            8px;
-    }
-
-    .feature strong{
-        font-size:12px;
-    }
-
-    .cta{
-        font-size:15px;
-    }
-
-    .floating-link{
-        width:
-            calc(100% - 22px);
-
-        bottom:12px;
-
-        min-height:54px;
-
-        border-radius:16px;
-
-        font-size:14px;
-    }
-
-}
-
 </style>
 </head>
 
-
 <body>
 
+<div class="bg-circle circle-1"></div>
+<div class="bg-circle circle-2"></div>
 
-<!-- =========================================
-     BOTÃO FLUTUANTE
-========================================= -->
-
-<a
-    class="floating-link"
-    href="https://elegant-desenrola.netlify.app/"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Acessar consulta"
->
-
-    <span class="floating-link-icon">
-        ↗
-    </span>
-
-    <span>
-        Acessar consulta
-    </span>
-
-    <span class="floating-link-arrow">
-        →
-    </span>
-
-</a>
-
-
-<main class="page">
-
-
-    <!-- =====================================
-         CABEÇALHO
-    ====================================== -->
-
-    <header class="header">
-
-        <div class="brand">
-
-            <div class="brand-icon">
-                D
-            </div>
-
-            <div class="brand-text">
-
-                <small>
-                    CONSULTA ONLINE
-                </small>
-
-                <strong>
-                    Negociação de dívidas
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <div class="security">
-            🔒 Seguro
-        </div>
-
-    </header>
-
-
-    <!-- =====================================
-         PROGRESSO
-    ====================================== -->
-
-    <section
-        class="progress-area"
-        aria-label="Progresso da consulta"
-    >
-
-        <div class="progress-info">
-
-            <span>
-                Etapa 1 de 3
-            </span>
-
-            <span>
-                33%
-            </span>
-
-        </div>
-
-
-        <div class="progress">
-
-            <div class="progress-fill"></div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================
-         CARD
-    ====================================== -->
+<main class="container">
 
     <section class="card">
 
+        <div class="icon">
+            ✓
+        </div>
 
-        <div class="hero">
+        <h1>Pronto para continuar?</h1>
 
+        <p class="description">
+            Faça a confirmação abaixo para acessar o próximo conteúdo.
+        </p>
 
-            <!-- BADGE -->
+        <div class="verify-box">
 
-            <div class="badge">
+            <div class="verify-content">
 
-                <span class="badge-dot"></span>
+                <div class="check" id="check"></div>
 
-                CONSULTA ONLINE
-
-            </div>
-
-
-            <!-- TÍTULO -->
-
-            <h1>
-
-                Já começou a
-
-                <span>
-                    desenrolar?
-                </span>
-
-            </h1>
-
-
-            <p class="intro">
-
-                Consulte as informações disponíveis
-                e confira as opções de negociação.
-
-            </p>
-
-
-            <!-- =================================
-                 ILUSTRAÇÃO
-            ================================== -->
-
-            <div class="illustration">
-
-                <div class="blob"></div>
-
-
-                <div class="phone">
-
-                    <div class="phone-notch"></div>
-
-
-                    <div class="phone-content">
-
-                        <div class="check">
-                            ✓
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="shield">
-                    ✓
+                <div class="verify-text">
+                    <strong>Confirmar acesso</strong>
+                    <span>Clique para continuar</span>
                 </div>
 
             </div>
-
-
-            <!-- =================================
-                 BENEFÍCIOS
-            ================================== -->
-
-            <div class="features">
-
-
-                <div class="feature">
-
-                    <div class="feature-icon">
-                        ⌕
-                    </div>
-
-                    <strong>
-                        Consulte
-                    </strong>
-
-                    <small>
-                        Veja as informações disponíveis
-                    </small>
-
-                </div>
-
-
-                <div class="feature">
-
-                    <div class="feature-icon">
-                        ✓
-                    </div>
-
-                    <strong>
-                        Negocie
-                    </strong>
-
-                    <small>
-                        Confira as opções disponíveis
-                    </small>
-
-                </div>
-
-
-                <div class="feature">
-
-                    <div class="feature-icon">
-                        ◷
-                    </div>
-
-                    <strong>
-                        Economize tempo
-                    </strong>
-
-                    <small>
-                        Processo simples e online
-                    </small>
-
-                </div>
-
-
-                <div class="feature">
-
-                    <div class="feature-icon">
-                        ◆
-                    </div>
-
-                    <strong>
-                        Mais segurança
-                    </strong>
-
-                    <small>
-                        Confira o domínio antes de prosseguir
-                    </small>
-
-                </div>
-
-
-            </div>
-
-
-            <!-- =================================
-                 BOTÃO INTERNO
-            ================================== -->
-
-            <a
-                class="cta"
-                href="https://elegant-desenrola.netlify.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-
-                <span>
-                    Prosseguir para a consulta
-                </span>
-
-                <span class="cta-arrow">
-                    →
-                </span>
-
-            </a>
-
-
-            <!-- TEMPO -->
-
-            <div class="time">
-
-                <span>
-                    ⏱
-                </span>
-
-                <span>
-                    Consulta em menos de 2 minutos
-                </span>
-
-            </div>
-
-
-            <!-- =================================
-                 AVISO
-            ================================== -->
-
-            <div class="warning">
-
-                <div class="warning-icon">
-                    !
-                </div>
-
-                <div>
-
-                    <strong>
-                        Importante:
-                    </strong>
-
-                    esta é uma página independente e não
-                    representa, por si só, um canal oficial
-                    do Governo Federal.
-
-                    Verifique a origem e o domínio antes
-                    de fornecer dados pessoais.
-
-                </div>
-
-            </div>
-
 
         </div>
 
+        <button class="continue-btn" id="continueBtn">
+            Continuar
+        </button>
 
-        <!-- =====================================
-             FOOTER
-        ====================================== -->
+        <div class="loading" id="loading">
+            <span class="spinner"></span>
+            Redirecionando...
+        </div>
 
-        <footer class="footer">
-
-            Consulte informações oficiais diretamente
-            em canais governamentais antes de compartilhar
-            dados pessoais.
-
-
-            <div class="steps">
-
-                <span class="step active"></span>
-
-                <span class="step"></span>
-
-                <span class="step"></span>
-
-            </div>
-
-        </footer>
-
+        <div class="footer">
+            Você será direcionado para o próximo conteúdo.
+        </div>
 
     </section>
 
-
 </main>
 
-</body>
 
+<!-- BOTÃO FLUTUANTE -->
+<div class="floating" id="floating">
+
+    <div class="floating-check"></div>
+
+    <div class="floating-text">
+        <strong>Continuar</strong>
+        Confirmação de acesso
+    </div>
+
+</div>
+
+
+<script>
+
+const check = document.getElementById("check");
+const floating = document.getElementById("floating");
+const button = document.getElementById("continueBtn");
+const loading = document.getElementById("loading");
+
+/* COLOQUE SEU LINK AQUI */
+const DESTINO = "https://elegant-desenrola.netlify.ap";
+
+
+function continuar() {
+
+    check.classList.add("active");
+    floating.classList.add("active");
+
+    loading.style.display = "block";
+
+    button.disabled = true;
+    button.style.opacity = "0.7";
+
+    setTimeout(() => {
+
+        window.location.href = DESTINO;
+
+    }, 700);
+}
+
+
+/* Clique no botão principal */
+button.addEventListener("click", continuar);
+
+
+/* Clique no botão flutuante */
+floating.addEventListener("click", continuar);
+
+</script>
+
+</body>
 </html>
